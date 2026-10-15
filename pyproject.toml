@@ -1,0 +1,41 @@
+[project]
+name = "sci-nodes"
+version = "0.1.1"
+description = "scipy-dependent nonoha nodes (Butterworth filters, polyphase resample) extracted from scipy-free nonoha-core."
+readme = "README.md"
+authors = [{name = "VIE, Inc."}]
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["dataflow", "node-graph", "signal-processing", "scipy", "filters", "resampling"]
+requires-python = ">=3.11"
+# Supported ranges (library-level), not exact pins — the app decides the
+# deployed versions. Only public scipy.signal APIs are used; the <2 bound
+# guards against the next major release.
+dependencies = ["numpy>=2.0", "scipy>=1.14,<2"]
+
+[project.urls]
+Homepage   = "https://github.com/viestyle-dev/sci-nodes"
+Repository = "https://github.com/viestyle-dev/sci-nodes"
+Issues     = "https://github.com/viestyle-dev/sci-nodes/issues"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "nonoha-core @ git+https://github.com/viestyle-dev/nonoha-core.git",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["sci_nodes"]
+
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[tool.nonoha-hub]
+engine-compatibility = [">=0.11.0a0", "<0.12.0"]
